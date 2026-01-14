@@ -24,7 +24,7 @@ def query_librarian_of_library(library_name):
     """Fetch the librarian assigned to a specific library."""
     try:
         library = Library.objects.get(name=library_name)
-        librarian = library.librarian
+        librarian = Librarian.objects.get(library=library)
         return librarian
     except Library.DoesNotExist:
         return None
