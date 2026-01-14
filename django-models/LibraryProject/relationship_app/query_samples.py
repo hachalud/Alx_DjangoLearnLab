@@ -8,7 +8,7 @@ def query_books_by_author(author_name):
     """Fetch all books written by a specific author."""
     try:
         author = Author.objects.get(name=author_name)
-        books = author.books.all()
+        books = Book.objects.filter(author=author)
         return books
     except Author.DoesNotExist:
         return None
