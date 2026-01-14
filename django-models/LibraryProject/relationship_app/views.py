@@ -6,9 +6,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Book
 def list_books(request):
-    books = Book.objects.all()
-    response_content = "\n".join([f"{book.title} by {book.author.name}" for book in books])
-    return HttpResponse(response_content, content_type="text/plain")
+    books = Book.objects.select_related('author').all()
+     return render(request, 'relationship_app/book_list.html', {'books': books})
 
 # Create a class-based view in relationship_app/views.py that displays details for a specific library, listing all books available in that library.
 # Utilize Django’s ListView or DetailView to structure this class-based view.
