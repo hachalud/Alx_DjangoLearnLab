@@ -34,12 +34,14 @@ def register(request):
         form = UserCreationForm()
     
     return render(request, 'relationship_app/register.html', {'form': form})
+
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required, user_passes_test
 
 
+# Admin role check
 def is_admin(user):
-    return user.is_authenticated and user.profile.role == 'Admin'
+    return user.profile.role == 'Admin'
 
 
 @login_required
@@ -48,8 +50,9 @@ def admin_view(request):
     return render(request, 'admin_view.html')
 
 
+# Librarian role check
 def is_librarian(user):
-    return user.is_authenticated and user.profile.role == 'Librarian'
+    return user.profile.role == 'Librarian'
 
 
 @login_required
@@ -58,14 +61,16 @@ def librarian_view(request):
     return render(request, 'librarian_view.html')
 
 
+# Member role check
 def is_member(user):
-    return user.is_authenticated and user.profile.role == 'Member'
+    return user.profile.role == 'Member'
 
 
 @login_required
 @user_passes_test(is_member)
 def member_view(request):
     return render(request, 'member_view.html')
+
 
 
 from django.contrib.auth.decorators import permission_required
