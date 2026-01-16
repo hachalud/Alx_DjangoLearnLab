@@ -36,40 +36,35 @@ def register(request):
     return render(request, 'relationship_app/register.html', {'form': form})
 
 from django.shortcuts import render
-from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.decorators import user_passes_test
 
 
-# Admin role check
 def is_admin(user):
-    return user.profile.role == 'Admin'
+    return user.userprofile.role == 'Admin'
 
 
-@login_required
 @user_passes_test(is_admin)
 def admin_view(request):
-    return render(request, 'admin_view.html')
+    return render(request, 'relationship_app/admin_view.html')
 
 
-# Librarian role check
 def is_librarian(user):
-    return user.profile.role == 'Librarian'
+    return user.userprofile.role == 'Librarian'
 
 
-@login_required
 @user_passes_test(is_librarian)
 def librarian_view(request):
-    return render(request, 'librarian_view.html')
+    return render(request, 'relationship_app/librarian_view.html')
 
 
-# Member role check
 def is_member(user):
-    return user.profile.role == 'Member'
+    return user.userprofile.role == 'Member'
 
 
-@login_required
 @user_passes_test(is_member)
 def member_view(request):
-    return render(request, 'member_view.html')
+    return render(request, 'relationship_app/member_view.html')
+
 
 
 
