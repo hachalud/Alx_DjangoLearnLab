@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Author(models.Model):
@@ -38,3 +39,12 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - {self.role}"
+    
+    # extend the book model with custom permissions
+    class Meta:
+        permissions = [
+            ("can add_book", "Can add book"),
+            ("can change_book", "Can change book"),
+            ("can delete_book", "Can delete book"),
+        ]
+    
