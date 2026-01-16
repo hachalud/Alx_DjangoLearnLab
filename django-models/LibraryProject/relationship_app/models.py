@@ -43,8 +43,8 @@ class UserProfile(models.Model):
     # extend the book model with custom permissions
     class Meta:
         permissions = [
-            ("can add_book", "Can add book"),
-            ("can change_book", "Can change book"),
-            ("can delete_book", "Can delete book"),
+            ("can_add_book", "Can add book"),
+            ("can_change_book", "Can change book"),
+            ("can_delete_book", "Can delete book"),
         ]
     
