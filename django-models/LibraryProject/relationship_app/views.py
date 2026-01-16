@@ -34,37 +34,39 @@ def register(request):
         form = UserCreationForm()
     
     return render(request, 'relationship_app/register.html', {'form': form})
-from django.contrib.auth import views as auth_views
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required, user_passes_test
+
+
 def is_admin(user):
-    return user.is_authenticated and user.profile.role == 'admin'
+    return user.is_authenticated and user.profile.role == 'Admin'
+
+
 @login_required
 @user_passes_test(is_admin)
 def admin_view(request):
-    return render(request, 'admin_view.html', {'user': request.user})
+    return render(request, 'admin_view.html')
 
-from django.shortcuts import render
-from django.contrib.auth.decorators import login_required, user_passes_test
 
 def is_librarian(user):
     return user.is_authenticated and user.profile.role == 'Librarian'
 
+
 @login_required
 @user_passes_test(is_librarian)
 def librarian_view(request):
-    return render(request, 'librarian_view.html', {'user': request.user})
+    return render(request, 'librarian_view.html')
 
-from django.shortcuts import render
-from django.contrib.auth.decorators import login_required, user_passes_test
 
 def is_member(user):
     return user.is_authenticated and user.profile.role == 'Member'
 
+
 @login_required
 @user_passes_test(is_member)
 def member_view(request):
-    return render(request, 'member_view.html', {'user': request.user})
+    return render(request, 'member_view.html')
+
 
 from django.contrib.auth.decorators import permission_required
 from django.shortcuts import render, redirect, get_object_or_404
