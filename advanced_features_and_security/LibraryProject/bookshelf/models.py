@@ -8,3 +8,12 @@ class Book(models.Model):
 
     def __str__(self):
         return f"{self.title} by {self.author} ({self.publication_year})"
+
+# Create a custom user model by extending AbstractUser, adding custom fields that are relevant to your application’s needs.
+from django.contrib.auth.models import AbstractUser
+class CustomUser(AbstractUser):
+    date_of_birth = models.DateField(null=True, blank=True)
+    profile_photo = models.ImageField(upload_to='profile_photos/', null=True, blank=True)
+
+    def __str__(self):
+        return self.username
