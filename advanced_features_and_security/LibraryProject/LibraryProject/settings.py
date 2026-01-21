@@ -124,3 +124,18 @@ AUTH_USER_MODEL = 'bookshelf.CustomUser'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+# SECURITY SETTINGS
+
+# IMPORTANT: Never use DEBUG=True in production
+DEBUG = False
+
+# Browser security protections
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+# Prevent site from being embedded in iframes
+X_FRAME_OPTIONS = "DENY"
+
+# Cookies only sent over HTTPS
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True

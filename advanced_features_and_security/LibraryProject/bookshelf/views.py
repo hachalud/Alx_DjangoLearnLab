@@ -70,3 +70,31 @@ def books(request):
     """
     books = Book.objects.all()
     return render(request, "bookshelf/books.html", {"books": books})
+
+from django.shortcuts import render
+from .models import Book
+from .forms import BookSearchForm
+
+
+def book_list(request):
+    """
+    Secure view using Django ORM to prevent SQL injection
+    """
+    books = Book.objects.all()
+
+    if request.method == "GET":
+        title = request.GET.get("title")
+
+        if title:
+            # SAFE: Django ORM automatically protects against SQL injection
+            books = Book.objects.filter(title__icontains=title)
+
+    return render(request, "bookshelf/book_list.html", {"books": books})
+def book_list(request):
+    books = Book.objects.all()
+    response = render(request, "bookshelf/book_list.html", {"books": books})
+
+    # Content Security Policy
+    response["Content-Security-Policy"] = "default-src 'self';"
+
+    return response
