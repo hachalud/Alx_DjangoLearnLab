@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
-from Alx_DjangoLearnLab.api_project.api.views import BookList
+from api.views import BookList
 
 urlpatterns = [
     path('admin/', admin.site.urls),
