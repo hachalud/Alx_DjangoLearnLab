@@ -52,7 +52,7 @@ class BookAPITestCase(APITestCase):
             'author': self.author2.id
         }
         response = self.client.post(url, data, format='json')
-        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
     def test_update_book(self):
         self.client.login(username='testuser', password='password')
         url = reverse('book-update', args=[self.book1.id])
