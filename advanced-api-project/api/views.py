@@ -9,6 +9,8 @@ from .serializers import BookSerializer
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
+from django_filters import rest_framework as filters
+
 
 
 
@@ -26,7 +28,7 @@ class BookListView(generics.ListAPIView):
         'publication_year': ['exact', 'gte', 'lte'],  # filter by year, range
         'author__name': ['exact', 'icontains'],  # filter by author's name
     }
-    
+
     search_fields = ['title', 'author__name']
 
     ordering_fields = ['title', 'publication_year', 'author__name']
