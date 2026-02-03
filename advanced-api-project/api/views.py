@@ -22,7 +22,8 @@ class BookListView(generics.ListAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     permission_classes = [permissions.AllowAny]  # Anyone can read
-     filter_backends = [DjangoFilterBackend]
+     filter_backends = [filters.DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
+
     filterset_fields = {
         'title': ['exact', 'icontains'],  # exact match or partial match
         'publication_year': ['exact', 'gte', 'lte'],  # filter by year, range
